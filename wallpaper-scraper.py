@@ -16,7 +16,7 @@ reddit = praw.Reddit(
     client_id=id_secret[0],
     client_secret=id_secret[1],
     user_agent="wallpaper-scraper",
-    username=getpass.getuser(prompt="Reddit Username: "),
+    username=input("Reddit Username: "),
     password=getpass.getpass(prompt="Reddit Password: ",))
 
 subreddit = reddit.subreddit("wallpapers")
