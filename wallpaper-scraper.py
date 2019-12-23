@@ -1,14 +1,20 @@
 #!/bin/python3
 import getpass
 import os
-import praw
 import sys
+from datetime import date
 from urllib.error import HTTPError
+
+import praw
 import wget
 
 directory = "."
+
 if len(sys.argv) > 1:
     directory = sys.argv[1]
+    print
+
+directory += f"/{str(date.today())}"
 
 id_secret = [x.replace("\n", "") for x in open(os.path.expanduser("~/.cache/wallpaper-scraper-keys"), "r").readlines()]
 
@@ -18,6 +24,11 @@ reddit = praw.Reddit(
     user_agent="wallpaper-scraper",
     username=input("Reddit Username: "),
     password=getpass.getpass(prompt="Reddit Password: ",))
+
+try:
+    os.mkdir(directory)
+except:
+    pass
 
 subreddit = reddit.subreddit("wallpapers")
 os.chdir(directory)
